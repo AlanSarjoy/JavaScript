@@ -1,82 +1,132 @@
-let usuario = prompt("Bienvenido a DecoTodoVuele, ingrese su usuario:");
+class Producto {
+  constructor(nombre, precio, stock){
+    this.nombre = nombre;
+    this.precio = precio;
+    this.stock = stock;
+  }
 
-function saludar (usuario) {
-  alert("Hola" + " "+ usuario);
-}
+  vender(cantidad){
+    this.stock -= cantidad;
+    if(this.stock < 1){
+      this.disponible = false;
+    }
+  }
 
-
-saludar(usuario);
-
-
-function pago(cuota) {
-  alert("Tu producto sale" + " " + "$" + cuota);
-}
-let producto = prompt(
-  "Ingresa una opción \n 1-Mesa de galeria \n 2-Mesa titan \n 3-Mesa cuadrada pinotea \n 4-Mesa baja Laurel \n 5-Mesa cuadrada con pata \n 6-Mesa rustica de galeria \n 7-Mesa comedor diario reciclado \n 8-Mesa laurel patas en X \n 9-Mesa baja con ruedas y tres cajones \n 10-Mesa de luz woodie vale \n 11-Mesa de apoyo pinotea \n 12-Mesita de apoyo"
-);
-if (producto == 1) {
-  precio = 32000;
-  console.log(precio);
-} else if (producto == 2) {
-  precio = 18000;
-  console.log(precio);
-} else if (producto == 3) {
-  precio = 18000;
-  console.log(precio);
-} else if (producto == 4) {
-  precio = 14500;
-  console.log(precio);
-} else if (producto == 5) {
-  precio = 12800;
-  console.log(precio);
-} else if (producto == 6) {
-  precio = 25000;
-  console.log(precio);
-} else if (producto == 7) {
-  precio = 30000;
-  console.log(precio);
-} else if (producto == 8) {
-  precio = 10000;
-  console.log(precio);
-} else if (producto == 9) {
-  precio = 23000;
-  console.log(precio);
-} else if (producto == 10) {
-  precio = 8800;
-  console.log(precio);
-} else if (producto == 11) {
-  precio = 9900;
-  console.log(precio);
-} else {
-  alert("No seleccionaste un producto existente");
-}
-
-let formadepago = prompt(
-  "Ingresa una opción \n 1-efectivo \n 2-transferencia bancaria \n 3-mercado pago "
-);
-if (formadepago == 1) {
-  cuota = precio;
-  console.log(cuota);
-} else if (formadepago == 2) {
-  cuota = precio * 1.1;
-  console.log(cuota);
-} else if (formadepago == 3) {
-  cuota = precio * 1.3;
-  console.log(cuota);
-} else {
-  alert("No elegiste ningun metodo de pago");
-  let formadepago = prompt(
-    "Ingresa una opción \n 1-efectivo \n 2-transferencia bancaria \n 3-mercado pago"
-  );
-  if (formadepago == 1) {
-    cuota = precio;
-    console.log(cuota);
-  } else if (formadepago == 2) {
-    cuota = precio * 1.1;
-    console.log(cuota);
-  } else if (formadepago == 3) {
-    cuota = precio * 1.3;
-    console.log(cuota);
+  sumarIva(){
+    this.precio = this.precio * 1.21;
   }
 }
-pago(cuota);
+
+// Empezamos por declarar el ARRAY.
+
+const mesas = [];
+
+mesas.push(new Producto("mesa de galeria", 25000, 3));
+mesas.push(new Producto("mesa titan", 20000, 5));
+mesas.push(new Producto("mesa cuadrada de pinotea", 21000, 1));
+mesas.push(new Producto("mesa baja laurel", 18500, 2));
+mesas.push(new Producto("mesa cuadrada con pata bocha", 28600, 3));
+mesas.push(new Producto("mesa rustica de galeria", 30000, 0));
+mesas.push(new Producto("mesa de comedor diario reciclado", 28300, 2));
+mesas.push(new Producto("mesa baja laurel patas en x", 15000, 4));
+mesas.push(new Producto("mesa baja con ruedas y tres cajones", 12700, 5));
+mesas.push(new Producto("mesa de luz woodie ale", 12100, 2));
+mesas.push(new Producto("mesa de apoyo pinotea", 17800, 1));
+mesas.push(new Producto("mesita de apoyo", 12300, 0));
+
+const sillas = [];
+
+sillas.push(new Producto("silla moderna reciclada", 11000, 2));
+sillas.push(new Producto("silla cabecera toledo con estirilla", 10000, 6));
+sillas.push(new Producto("silla revestida recta lino", 13100, 12));
+sillas.push(new Producto("silla vestida f", 5000, 12));
+sillas.push(new Producto("silla london", 7600, 12));
+sillas.push(new Producto("silla francesa", 7600, 12));
+sillas.push(new Producto("silla de descanso", 8000, 12));
+sillas.push(new Producto("banqueta cuadrada con respaldo", 5000, 12));
+sillas.push(new Producto("banqueta francesa mariposa", 6000, 12));
+sillas.push(new Producto("silla cabecera esterillada", 13000, 12));
+sillas.push(new Producto("acapulco sur", 8900, 12));
+sillas.push(new Producto("silla jack", 5000, 12));
+
+const sillones = [];
+
+
+sillones.push(new Producto("sofa tokyo", 48000, 1));
+sillones.push(new Producto("sillon esquinero italia", 66000, 2));
+sillones.push(new Producto("sofa ingles reciclado", 32000, 1));
+sillones.push(new Producto("sofa torino", 29000, 1));
+sillones.push(new Producto("sillon estocolmo", 40000, 1));
+sillones.push(new Producto("sillon esquinero phanton", 39500, 2));
+sillones.push(new Producto("silloncito velvet", 51000, 2));
+sillones.push(new Producto("sillon bkf", 22000, 3));
+sillones.push(new Producto("sillon de sala francesa luis xv", 31000, 2));
+sillones.push(new Producto("camastro galeria x3", 55000, 6));
+sillones.push(new Producto("butaca net", 22650, 4));
+sillones.push(new Producto("silloncito outdoor", 33000, 6));
+
+
+const productos = [...mesas, ...sillas, ...sillones];
+
+// le sume el Iva a todos los productos de los ARRAYS.
+for(Producto of productos){
+    Producto.sumarIva();
+}
+
+let seleccion = prompt("Bienvenido, desea ver nuestra lista de productos? \n 1.Si \n 2.No");
+
+
+
+if(seleccion == 1){
+  alert("A continuación le vamos a mostrar todos nuestros productos");
+  let todosLosProductos = productos.map((Producto) => Producto.nombre + ", Precio: $" + Producto.precio + ", " + "Stock:" + Producto.stock);
+
+  alert(todosLosProductos.join(" \n "));
+}
+
+
+
+
+let productoAElegir = prompt(`Qué producto desea comprar?`);
+let existe = false;
+let posicion = -1;
+
+
+
+productos.forEach((item, indice) => {
+  if(productoAElegir === item.nombre){
+    existe = true;
+    posicion = indice;
+  }
+});
+
+if(existe){
+  let cantidad = parseInt(prompt(`Qué cantidad desea comprar?`));
+  if(productos[posicion].stock < cantidad){
+    alert(`Disculpa, por el momento no tenemos tantos, solo tengo ${productos[posicion].stock} en stock`);
+  }else {
+    productos[posicion].vender(cantidad);
+
+    if(!productos[posicion].disponible){
+      productos.splice(posicion, -1);
+    }
+  }
+}else {
+  alert(`Lo lamento. Este producto no lo tengo.`);
+}
+
+console.log(productos);
+
+
+
+
+
+
+
+
+
+// console.log para ir probando que todo funcione...
+/*console.log(mesas);
+console.log(sillas);
+console.log(sillones);
+console.log(productos);*/
