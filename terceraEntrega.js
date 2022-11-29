@@ -13,28 +13,29 @@ class Producto {
     }
   }
 
-  sumarIva(){
-    this.precio = this.precio * 1.21;
-  }
 }
 
+//inicio secion
+let usuario;
+let password;
+let usuarioLS;
+
+usuarioLS = localStorage.getItem("usuario");
+console.log(usuarioLS);
+
+if(usuarioLS == null){
+  usuario = prompt("Ingrese su usuario.");
+  password = prompt("Ingrese su contraseña");
+  localStorage.setItem("usuario", usuario);
+}else{
+  alert(`Hola, ${usuarioLS}`);
+}
+
+
+let carrito = document.getElementById("carrito");
 // Empezamos por declarar el ARRAY.
 
-const mesas = [
-  /*{id: 1, nombre: "mesa de galeria", precio: 25000, stock: 3},
-  {id: 2, nombre: "mesa titan", precio: 20000, stock: 5},
-  {id: 3, nombre: "mesa cuadrada de pinotea", precio: 21000, stock: 1},
-  {id: 4, nombre: "mesa baja laurel", precio: 18500, stock: 2},
-  {id: 5, nombre: "mesa cuadrada con pata bocha", precio: 28600 , stock: 3},
-  {id: 6, nombre: "mesa rustica de galeria", precio: 30000 , stock: 0},
-  {id: 7, nombre: "mesa de comedor diario reciclado", precio: 28300, stock: 2},
-  {id: 8, nombre: "mesa baja laurel con patas en x", precio: 15000 , stock: 4},
-  {id: 9, nombre: "mesa baja con ruedas y tres cajones", precio: 12700, stock: 5},
-  {id: 10, nombre: "mesa de lz woddie ale", precio: 12100 , stock: 2},
-  {id: 11, nombre: "mesa de apoyo pinotea", precio: 17800, stock: 1},
-  {id: 12, nombre: "mesita de apoyo", precio: 12300, stock: 0},*/
-
-];
+const mesas = [];
 
 mesas.push(new Producto(1,"mesa de galeria", 25000, 3));
 mesas.push(new Producto(2,"mesa titan", 20000, 5));
@@ -83,10 +84,6 @@ sillones.push(new Producto(36,"silloncito outdoor", 33000, 6));
 
 const productos = [...mesas, ...sillas, ...sillones];
 
-// le sume el Iva a todos los productos de los ARRAYS.
-for(Producto of productos){
-  Producto.sumarIva();
-}
 
 let seleccion = prompt("Bienvenido, desea ver nuestra lista de productos? \n 1.Si \n 2.No");
 
@@ -100,38 +97,41 @@ if(seleccion == 1){
 }
 
 
+let productosEnCarrito = [];
+let productosEnCarritoLS = localStorage.getItem("carrito");
 
+if(productosEnCarritoLS){
+  productosEnCarrito = JSON.parse(productosEnCarritoLS);
 
-let productoAElegir = prompt(`Qué producto desea comprar?`);
-let existe = false;
-let posicion = -1;
+  productosEnCarrito.forEach(item => {
+    carrito.innerHTML += `<li>
+    ${item.cantidad}x ${item.nombre} 
+    </li>`
+  });
 
-
-
-productos.forEach((item, indice) => {
-  if(productoAElegir === item.nombre){
-    existe = true;
-    posicion = indice;
-  }
-});
-
-if(productos[posicion].stock <= 0){
-  productos.splice();
-}
-if(existe){
-  let cantidad = parseInt(prompt(`Qué cantidad desea comprar?`));
-  
-  if(productos[posicion].stock < cantidad){
-    alert(`Disculpa, por el momento no tenemos tantos, solo tengo ${productos[posicion].stock} en stock`);
-  }else {
-    productos[posicion].vender(cantidad);
-
-    if(!productos[posicion].disponible){
-      productos.splice(posicion, -1);
-    }
-  }
-}else {
-  alert(`Lo lamento. Este producto no lo tengo.`);
 }
 
-console.log(productos);
+
+
+let productoSeleccionado = prompt("Ingrese el producto que desea agregar al carrito.");
+
+
+
+let productoRequerido = productos.find((item) => productoSeleccionado === item.nombre );
+
+if(productoRequerido){
+  let cantidad = parseInt(prompt("Cuantos productos desea agregar al carrito?"));
+  productosEnCarrito.push({nombre: productoSeleccionado, cantidad: cantidad});
+
+  localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
+}else{
+  alert("Este producto no existe.");
+}
+
+//Eventos
+let boton = document.getElementById("btn");
+
+
+boton.addEventListener("click", () =>{
+  alert("Producto agregado al carrito");
+})
